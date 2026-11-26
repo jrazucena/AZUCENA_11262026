@@ -16,11 +16,14 @@ namespace AZUCENA_11262026.Services
 
         private readonly IJsonFileProcessingService _jsonFileProcessingService;
         private readonly IFileTrackingService _fileTrackingService;
-
-        public FileProcessingService(IJsonFileProcessingService jsonFileProcessingService, IFileTrackingService fileTrackingService)
+        private readonly ILogger<FileProcessingService> _logger;
+        public FileProcessingService(IJsonFileProcessingService jsonFileProcessingService, IFileTrackingService fileTrackingService, ILogger<FileProcessingService> logger)
         {
             _jsonFileProcessingService = jsonFileProcessingService;
             _fileTrackingService = fileTrackingService;
+            _logger = logger;
+
+
         }
 
 
@@ -33,12 +36,12 @@ namespace AZUCENA_11262026.Services
             var fileName = Path.GetFileName(file.FileName.Replace('\\', '/'));
 
             var stopwatch = Stopwatch.StartNew();
-
+            _logger.LogInformation("File processing started. ProcessingId: {ProcessingId}, FileSize: {FileSizeBytes}", processingId, file.Length);
             FileProcessingResult result;
             try
             {
                 ValidateFile(file);
-
+                
                 await using var fileStream = file.OpenReadStream();
 
                 result = await _jsonFileProcessingService.ProcessFileAsync(
@@ -52,10 +55,19 @@ namespace AZUCENA_11262026.Services
             catch
             {
                 RecordProcessing(ProcessingStatus.Failed);
+
+                _logger.LogWarning("File processing failed. ProcessingId: {ProcessingId}, " + "Duration: {DurationMs} ms", processingId, stopwatch.ElapsedMilliseconds);
+
                 throw;
             }
 
             RecordProcessing(ProcessingStatus.Success, result);
+
+            _logger.LogInformation("File processing completed. ProcessingId: {ProcessingId}, " + "TotalRecords: {TotalRecords}, MatchedRecords: {MatchedRecords}, " + "Duration: {DurationMs} ms",
+                processingId,
+                result.TotalRecords,
+                result.MatchedRecords,
+                stopwatch.ElapsedMilliseconds);
 
             return new FileProcessingResponse
             {
