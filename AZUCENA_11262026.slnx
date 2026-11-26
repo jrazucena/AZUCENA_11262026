@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="AZUCENA_11262026.csproj" />
+  <Project Path="AZUCENA_11262026.Tests/AZUCENA_11262026.Tests.csproj" />
 </Solution>

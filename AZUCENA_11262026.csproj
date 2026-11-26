@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -17,8 +17,11 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
   </ItemGroup>
-
+	<ItemGroup>
+		<Compile Remove="AZUCENA_11262026.Tests/**/*.cs" />
+		<Content Remove="AZUCENA_11262026.Tests/**" />
+		<EmbeddedResource Remove="AZUCENA_11262026.Tests/**" />
+		<None Remove="AZUCENA_11262026.Tests/**" />
+	</ItemGroup>
 </Project>

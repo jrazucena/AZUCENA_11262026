@@ -1,5 +1,7 @@
+using AZUCENA_11262026.Interfaces;
 using AZUCENA_11262026.Middleware;
 using AZUCENA_11262026.Options;
+using AZUCENA_11262026.Services;
 using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,7 +46,7 @@ builder.Services
     .BindConfiguration(ApiKeyOptions.SectionName)
     .ValidateDataAnnotations()
     .ValidateOnStart();
-
+builder.Services.AddScoped<IFileProcessingService, JsonFileProcessingService>();
 
 var app = builder.Build();
 
@@ -61,8 +63,12 @@ app.UseWhen(
     {
         branch.UseMiddleware<ApiKeyMiddleware>();
     });
-app.MapGet("/api/auth-check", () =>
-    Results.Ok(new { message = "Authenticated" }));
+
+// Uncomment the following line to add an authentication check endpoint
+//app.MapGet("/api/auth-check", () =>
+//    Results.Ok(new { message = "Authenticated" }));
+
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
