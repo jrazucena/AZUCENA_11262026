@@ -1,4 +1,4 @@
-﻿namespace AZUCENA_11262026.Models
+﻿namespace AZUCENA_11262026.Models.Results
 {
     public sealed class FileProcessingResult
     {

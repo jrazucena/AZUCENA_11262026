@@ -1,4 +1,4 @@
-﻿using AZUCENA_11262026.Models;
+﻿using AZUCENA_11262026.Models.Results;
 
 namespace AZUCENA_11262026.Interfaces
 {

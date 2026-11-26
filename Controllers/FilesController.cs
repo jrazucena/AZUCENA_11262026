@@ -10,10 +10,11 @@ namespace AZUCENA_11262026.Controllers
     public sealed class FilesController : ControllerBase
     {
         private readonly IFileProcessingService _fileProcessingService;
-
-        public FilesController(IFileProcessingService fileProcessingService)
+        private readonly IFileTrackingService _fileTrackingService;
+        public FilesController(IFileProcessingService fileProcessingService, IFileTrackingService fileTrackingService)
         {
             _fileProcessingService = fileProcessingService;
+            _fileTrackingService = fileTrackingService;
         }
 
         [HttpPost("process")]
@@ -25,15 +26,20 @@ namespace AZUCENA_11262026.Controllers
         [ProducesResponseType(StatusCodes.Status413PayloadTooLarge)]
         [ProducesResponseType(StatusCodes.Status415UnsupportedMediaType)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<FileProcessingResponse>> ProcessFileAsync(
-       [FromForm] FileProcessingRequest request,
-       CancellationToken cancellationToken)
+        public async Task<ActionResult<FileProcessingResponse>> ProcessFileAsync([FromForm] FileProcessingRequest request, CancellationToken cancellationToken)
         {
-            var result = await _fileProcessingService.ProcessFileAsync(
-                request,
-                cancellationToken);
+            var result = await _fileProcessingService.ProcessFileAsync(request, cancellationToken);
 
             return Ok(result);
+        }
+        [HttpGet("report")]
+        [ProducesResponseType<FileProcessingReport>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public ActionResult<FileProcessingReport> GetReport()
+        {
+            var report = _fileTrackingService.GetReport();
+
+            return Ok(report);
         }
     }
 }

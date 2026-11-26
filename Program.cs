@@ -50,6 +50,7 @@ builder.Services
 
 builder.Services.AddScoped<IJsonFileProcessingService, JsonFileProcessingService>();
 builder.Services.AddScoped<IFileProcessingService, FileProcessingService>();
+builder.Services.AddSingleton<IFileTrackingService, FileTrackingService>();
 
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 builder.Services.AddProblemDetails();

@@ -1,5 +1,6 @@
 ﻿using AZUCENA_11262026.Interfaces;
 using AZUCENA_11262026.Models;
+using AZUCENA_11262026.Models.Results;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 
