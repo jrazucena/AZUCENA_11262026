@@ -24,7 +24,8 @@
 LICENSE
 README.md
 !**/.gitignore
-!.git/HEAD
-!.git/config
-!.git/packed-refs
-!.git/refs/heads/**
+# Unit test project
+AZUCENA_11262026.Tests/
+
+# Local environment configuration
+**/.env.*
