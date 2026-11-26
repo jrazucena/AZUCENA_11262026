@@ -1,5 +1,6 @@
 using AZUCENA_11262026.Middleware;
 using AZUCENA_11262026.Options;
+using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,34 @@ builder.Services.AddControllers();
 
 // Register Swagger services
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    const string securitySchemeId = "ApiKey";
+
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "File Processing API",
+        Version = "v1",
+        Description = "API for processing and reporting inventory files."
+    });
+
+    options.AddSecurityDefinition(securitySchemeId,
+        new OpenApiSecurityScheme
+        {
+            Name = "X-API-Key",
+            Type = SecuritySchemeType.ApiKey,
+            In = ParameterLocation.Header,
+            Description = "Enter your API key."
+        });
+
+    options.AddSecurityRequirement(document =>
+        new OpenApiSecurityRequirement
+        {
+            [new OpenApiSecuritySchemeReference(
+                securitySchemeId, document)] = []
+        });
+});
 
 // Register API key configuration
 builder.Services
