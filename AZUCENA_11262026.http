@@ -2,7 +2,7 @@
 
 
 @baseUrl = https://localhost:7299
-@apiKey = judeapikey123
+@apiKey = your-api-key-here
 
 ### Test 1 - Missing API key
 GET {{baseUrl}}/api/auth-check

@@ -9,8 +9,8 @@ namespace AZUCENA_11262026.Models
         [Required]
         public required string ProductName { get; set; }
         [Range(0, int.MaxValue)]
-        public int QuantityOnHand { get; set; }
+        public required int QuantityOnHand { get; set; }
         [Range(0, int.MaxValue)]
-        public int ReorderLevel { get; set; }
+        public required int ReorderLevel { get; set; }
     }
 }
