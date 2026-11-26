@@ -1,0 +1,6 @@
+@AZUCENA_11262026_HostAddress = http://localhost:5167
+
+GET {{AZUCENA_11262026_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
