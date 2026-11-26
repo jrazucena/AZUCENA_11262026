@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace AZUCENA_11262026.Services
 {
-    public sealed class JsonFileProcessingService : IFileProcessingService
+    public sealed class JsonFileProcessingService : IJsonFileProcessingService
     {
         private static readonly JsonSerializerOptions SerializerOptions = new()
         {

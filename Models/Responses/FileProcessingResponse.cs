@@ -6,7 +6,7 @@
         public required string FileName { get; set; }
         public int TotalRecords { get; set; }
         public int MatchedRecords { get; set; }
-        public int ProcessingTimeMs { get; set; }
+        public long ProcessingTimeMs { get; set; }
         public IReadOnlyList<Product>? Results { get; set; }
 
     }

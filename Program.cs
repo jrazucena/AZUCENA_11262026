@@ -46,7 +46,9 @@ builder.Services
     .BindConfiguration(ApiKeyOptions.SectionName)
     .ValidateDataAnnotations()
     .ValidateOnStart();
-builder.Services.AddScoped<IFileProcessingService, JsonFileProcessingService>();
+
+builder.Services.AddScoped<IJsonFileProcessingService, JsonFileProcessingService>();
+builder.Services.AddScoped<IFileProcessingService, FileProcessingService>();
 
 var app = builder.Build();
 
