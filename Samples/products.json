@@ -1,0 +1,20 @@
+[
+  {
+    "productCode": "PRD001",
+    "productName": "Keyboard",
+    "quantityOnHand": 25,
+    "reorderLevel": 10
+  },
+  {
+    "productCode": "PRD002",
+    "productName": "Mouse",
+    "quantityOnHand": 5,
+    "reorderLevel": 10
+  },
+  {
+    "productCode": "PRD003",
+    "productName": "Monitor",
+    "quantityOnHand": 10,
+    "reorderLevel": 10
+  }
+]

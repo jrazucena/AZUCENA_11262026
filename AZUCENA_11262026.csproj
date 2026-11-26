@@ -15,4 +15,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="11.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Middleware\" />
+    <Folder Include="Options\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
