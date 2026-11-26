@@ -1,3 +1,4 @@
+using AZUCENA_11262026.Exceptions;
 using AZUCENA_11262026.Interfaces;
 using AZUCENA_11262026.Middleware;
 using AZUCENA_11262026.Options;
@@ -50,6 +51,9 @@ builder.Services
 builder.Services.AddScoped<IJsonFileProcessingService, JsonFileProcessingService>();
 builder.Services.AddScoped<IFileProcessingService, FileProcessingService>();
 
+builder.Services.AddExceptionHandler<ApiExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -58,20 +62,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseExceptionHandler();
 
+// Uncomment the following line to add an authentication check endpoint
+//app.MapGet("/api/auth-check", () =>
+//    Results.Ok(new { message = "Authenticated" }));
+app.UseHttpsRedirection();
 app.UseWhen(
     context => context.Request.Path.StartsWithSegments("/api"),
     branch =>
     {
         branch.UseMiddleware<ApiKeyMiddleware>();
     });
-
-// Uncomment the following line to add an authentication check endpoint
-//app.MapGet("/api/auth-check", () =>
-//    Results.Ok(new { message = "Authenticated" }));
-
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
