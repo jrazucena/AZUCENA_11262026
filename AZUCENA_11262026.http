@@ -1,6 +1,28 @@
 @AZUCENA_11262026_HostAddress = http://localhost:5167
 
-GET {{AZUCENA_11262026_HostAddress}}/weatherforecast/
-Accept: application/json
+
+@baseUrl = https://localhost:7299
+@apiKey = judeapikey123
+
+### Test 1 - Missing API key
+GET {{baseUrl}}/api/auth-check
+
+### Test 2 - Invalid API key
+GET {{baseUrl}}/api/auth-check
+X-API-Key: invalid-key
+
+### Test 3 - Empty API key
+GET {{baseUrl}}/api/auth-check
+X-API-Key: ""
+
+### Test 4 - Valid API key
+GET {{baseUrl}}/api/auth-check
+X-API-Key: {{apiKey}}
+
+### Test 5 - Multiple API keys
+GET {{baseUrl}}/api/auth-check
+X-API-Key: {{apiKey}}
+X-API-Key: invalid-key
+
 
 ###

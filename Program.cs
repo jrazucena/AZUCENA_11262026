@@ -1,3 +1,4 @@
+using AZUCENA_11262026.Middleware;
 using AZUCENA_11262026.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +20,6 @@ builder.Services
 
 var app = builder.Build();
 
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -27,6 +27,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseWhen(
+    context => context.Request.Path.StartsWithSegments("/api"),
+    branch =>
+    {
+        branch.UseMiddleware<ApiKeyMiddleware>();
+    });
+app.MapGet("/api/auth-check", () =>
+    Results.Ok(new { message = "Authenticated" }));
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
