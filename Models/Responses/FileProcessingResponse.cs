@@ -7,7 +7,7 @@
         public int TotalRecords { get; set; }
         public int MatchedRecords { get; set; }
         public int ProcessingTimeMs { get; set; }
-        public IReadOnlyList<Products>? Results { get; set; }
+        public IReadOnlyList<Product>? Results { get; set; }
 
     }
 }

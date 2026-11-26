@@ -2,7 +2,7 @@
 
 namespace AZUCENA_11262026.Models
 {
-    public sealed class Products
+    public sealed class Product
     {
         [Required]
         public required string ProductCode { get; set; }

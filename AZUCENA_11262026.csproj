@@ -19,7 +19,6 @@
     <Folder Include="Controllers\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Middleware\" />
-    <Folder Include="Options\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
